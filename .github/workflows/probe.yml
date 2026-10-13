@@ -1,0 +1,11 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s -o sofa.txt -w "SOFASCORE HTTP %{http_code}\n" -A "Mozilla/5.0" "https://api.sofascore.com/api/v1/search/all?q=Sabah"
+          head -c 400 sofa.txt; echo
+          curl -s -o fb.txt -w "FOREBET HTTP %{http_code}\n" -A "Mozilla/5.0" "https://www.forebet.com/en/football/matches/sabah-slavia-praha-2547548"
+          head -c 300 fb.txt; echo
